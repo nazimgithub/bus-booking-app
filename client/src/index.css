@@ -1,0 +1,18 @@
+:root{
+  --primary: #007bff;
+  --secondary: #6c757d;
+  --success: #28a745;
+  --danger: #dc3545;
+  --warning: #ffc107;
+  --info: #17a2b8;
+  --light: #f8f9fa;
+  --dark: #343a40;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+{ 
+  font-family: "Montserrat", sans-serif !important;
+  font-size: 16px !important;
+}

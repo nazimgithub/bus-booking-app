@@ -1,0 +1,48 @@
+/* heights and widths */
+
+.h-screen{
+  height: 100vh;
+}
+
+.w-400{
+  width: 400px; 
+}
+
+/* inputs */
+input{
+  height: 40px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 0 10px;
+  width: 100%;
+}
+
+/* card */
+.card{
+  border: 2px solid #ccc;
+  box-shadow: 0 0 2px gray;
+}
+
+/* text sytles */
+.text-2xl{
+  font-size: 30px;
+}
+.text-xl{
+  font-size: 25px;
+}
+.text-lg{
+  font-size: 20px;
+}
+.text-md{
+  font-size: 18px;
+}
+
+/* buttons */
+.primary-btn{
+  background-color: #ccc;
+  color: #000;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
