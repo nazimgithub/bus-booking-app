@@ -7,9 +7,17 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import PublicRoute from "./components/PublicRoute";
 import PrivateRoute from "./components/ProtectedRoute";
+import Loader from "./components/Loader";
+import { useSelector } from "react-redux";
+import AdminHome from "./pages/Admin/AdminHome";
+import AdminBuses from "./pages/Admin/AdminBuses";
+import AdminUsers from "./pages/Admin/AdminUsers";
+
 function App() {
+  const { loading } = useSelector((state) => state.alerts);
   return (
     <div>
+      {loading && <Loader />}
       <BrowserRouter>
         <Routes>
           <Route
@@ -17,6 +25,30 @@ function App() {
             element={
               <PrivateRoute>
                 <Home />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <PrivateRoute>
+                <AdminHome />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin/buses"
+            element={
+              <PrivateRoute>
+                <AdminBuses />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+              <PrivateRoute>
+                <AdminUsers />
               </PrivateRoute>
             }
           />
