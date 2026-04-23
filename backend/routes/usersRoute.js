@@ -90,7 +90,7 @@ router.post("/login", async (req, res) => {
 // validate token for authorization
 router.post("/validate-token", authMiddleware, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id);
+    const user = await User.findById(req.user.id).select("-password");
     if (!user) {
       return res.send({
         success: false,
@@ -101,7 +101,7 @@ router.post("/validate-token", authMiddleware, async (req, res) => {
     res.send({
       success: true,
       message: "Token is valid",
-      data: null,
+      data: user,
     });
   } catch (err) {
     res.send({

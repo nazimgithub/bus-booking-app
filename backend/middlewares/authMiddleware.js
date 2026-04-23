@@ -4,7 +4,6 @@ module.exports = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
     const result = token.replace(/^"|"$/g, "");
-    console.log(result);
 
     if (!result) {
       return res.status(401).send({
