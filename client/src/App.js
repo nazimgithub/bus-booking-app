@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import AdminHome from "./pages/Admin/AdminHome";
 import AdminBuses from "./pages/Admin/AdminBuses";
 import AdminUsers from "./pages/Admin/AdminUsers";
+import AdminBooking from "./pages/Admin/AdminBooking";
 
 function App() {
   const { loading } = useSelector((state) => state.alerts);
@@ -49,6 +50,14 @@ function App() {
             element={
               <PrivateRoute>
                 <AdminUsers />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin/booking"
+            element={
+              <PrivateRoute>
+                <AdminBooking />
               </PrivateRoute>
             }
           />

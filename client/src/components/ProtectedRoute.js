@@ -8,7 +8,7 @@ import { showLoading, hideLoading } from "../redux/alertSlice";
 import DefaultLayout from "./DefaultLayout";
 
 function ProtectedRoute({ children }) {
-  const { loading } = useSelector((state) => state.alerts);
+  const { user } = useSelector((state) => state.users);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const validateToken = async () => {
@@ -46,7 +46,8 @@ function ProtectedRoute({ children }) {
       navigate("/login");
     }
   }, []);
-  return <div>{!loading && <DefaultLayout>{children}</DefaultLayout>}</div>;
+
+  return <div>{user && <DefaultLayout>{children}</DefaultLayout>}</div>;
 }
 
 export default ProtectedRoute;
