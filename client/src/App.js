@@ -1,4 +1,5 @@
 import React from "react";
+import { Toaster } from "react-hot-toast";
 import "antd/dist/antd.css";
 import "./resources/global.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -13,12 +14,14 @@ import AdminHome from "./pages/Admin/AdminHome";
 import AdminBuses from "./pages/Admin/AdminBuses";
 import AdminUsers from "./pages/Admin/AdminUsers";
 import AdminBooking from "./pages/Admin/AdminBooking";
+import BookNow from "./pages/BookNow";
 
 function App() {
   const { loading } = useSelector((state) => state.alerts);
   return (
     <div>
       {loading && <Loader />}
+      <Toaster position="top-right" />
       <BrowserRouter>
         <Routes>
           <Route
@@ -26,6 +29,14 @@ function App() {
             element={
               <PrivateRoute>
                 <Home />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/book-now/:id"
+            element={
+              <PrivateRoute>
+                <BookNow />
               </PrivateRoute>
             }
           />

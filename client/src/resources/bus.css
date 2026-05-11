@@ -1,0 +1,26 @@
+.box-container{
+  border: 2px solid grey !important;
+  padding: 10px;
+  width: 300px !important;
+}
+
+.seat{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
+
+.selected-seat{
+  background-color: green;
+  color: white;
+}
+
+.booked-seat{
+  background-color: gray;
+  color: white;
+  pointer-events: none !important;
+  cursor: disabled !important;
+}

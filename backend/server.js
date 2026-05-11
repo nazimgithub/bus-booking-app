@@ -10,6 +10,7 @@ app.use(express.json());
 // routes
 const usersRoute = require("./routes/usersRoute");
 const busesRoute = require("./routes/busesRoute");
+const bookingRoute = require("./routes/bookingRoute");
 
 app.use(cors()); // ✅ allow all origins (dev only)
 
@@ -17,6 +18,7 @@ app.use(cors()); // ✅ allow all origins (dev only)
 app.use(express.json());
 app.use("/api/users", usersRoute);
 app.use("/api/buses", busesRoute);
+app.use("/api/booking", bookingRoute);
 
 app.listen(port, () => {
   console.log(`Node server listening on port ${port}`);

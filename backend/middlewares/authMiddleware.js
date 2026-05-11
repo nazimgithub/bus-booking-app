@@ -15,6 +15,7 @@ module.exports = (req, res, next) => {
 
     const decode = jwt.verify(result, process.env.JWT_SECRET);
     req.user = decode;
+    req.body.userId = decode.userId;
     next();
   } catch (error) {
     return res.status(401).send({

@@ -57,7 +57,7 @@ function DefaultLayout({ children }) {
     },
   ];
 
-  const menuToRender = user?.role ? adminMenu : userMenu;
+  const menuToRender = user?.role === "Admin" ? adminMenu : userMenu;
   const activeRoute = window.location.pathname;
 
   return (

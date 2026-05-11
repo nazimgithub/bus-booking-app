@@ -4,8 +4,9 @@ import PageTitle from "../../components/PageTitle";
 import { showLoading, hideLoading } from "../../redux/alertSlice";
 import { useDispatch } from "react-redux";
 import { axiosInstance } from "../../helpers/axiosInstance";
-import { message, Table } from "antd";
+import { message, Table, Popconfirm } from "antd";
 import moment from "moment";
+import toast from "react-hot-toast";
 
 function AdminBuses() {
   const dispatch = useDispatch();
@@ -30,6 +31,25 @@ function AdminBuses() {
       dispatch(hideLoading());
       message.error(error.message);
     }
+  };
+
+  const deleteBus = async (id) => {
+    try {
+      dispatch(showLoading());
+      const response = await axiosInstance.post(
+        `http://localhost:5000/api/buses/delete-bus`,
+        {
+          _id: id,
+        },
+      );
+      dispatch(hideLoading());
+      if (response.data.success) {
+        message.success(response.data.message);
+        getBuses();
+      } else {
+        message.error(response.data.message);
+      }
+    } catch (error) {}
   };
 
   const columns = [
@@ -71,14 +91,27 @@ function AdminBuses() {
       dataIndex: "actions",
       render: (action, record) => (
         <div className="d-flex gap-3">
-          <i
-            className="ri-pencil-line"
-            onClick={() => {
+          <Popconfirm
+            title="Update Bus"
+            description="Are you sure to update details?"
+            onConfirm={() => {
               setSelectedBus(record);
               setShowBusForm(true);
             }}
-          ></i>
-          <i className="ri-delete-bin-line"></i>
+            okText="Yes"
+            cancelText="No"
+          >
+            <i className="ri-pencil-line cursor-pointer"></i>
+          </Popconfirm>
+          <Popconfirm
+            title="Delete Bus"
+            description="Are you sure to delete this bus?"
+            onConfirm={() => deleteBus(record._id)}
+            okText="Yes"
+            cancelText="No"
+          >
+            <i className="ri-delete-bin-line cursor-pointer"></i>
+          </Popconfirm>
         </div>
       ),
     },

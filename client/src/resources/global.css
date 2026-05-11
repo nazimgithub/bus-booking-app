@@ -21,6 +21,7 @@ input{
 .card{
   border: 2px solid #ccc;
   box-shadow: 0 0 2px gray;
+  border-radius: 0 !important;
 }
 
 /* text sytles */
