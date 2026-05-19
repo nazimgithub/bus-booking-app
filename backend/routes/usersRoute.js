@@ -54,30 +54,36 @@ router.post("/login", async (req, res) => {
         message: "User not found",
         data: null,
       });
-    } else {
-      const isPasswordValid = await bcrypt.compare(
-        req.body.password,
-        user.password,
-      );
+    }
 
-      if (!isPasswordValid) {
-        return res.send({
-          success: false,
-          message: "Invalid password",
-          data: null,
-        });
-      }
+    const isPasswordValid = await bcrypt.compare(
+      req.body.password,
+      user.password,
+    );
 
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-        expiresIn: "1d",
-      });
-
-      res.json({
-        success: true,
-        message: "User logged in successfully",
-        data: token,
+    if (!isPasswordValid) {
+      return res.send({
+        success: false,
+        message: "Invalid password",
+        data: null,
       });
     }
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
+
+    res.json({
+      success: true,
+      message: "User logged in successfully",
+      data: {
+        token,
+        user: {
+          id: user._id,
+          email: user.email,
+        },
+      },
+    });
   } catch (err) {
     res.send({
       success: false,

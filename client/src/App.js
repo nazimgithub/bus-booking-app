@@ -14,10 +14,14 @@ import AdminHome from "./pages/Admin/AdminHome";
 import AdminBuses from "./pages/Admin/AdminBuses";
 import AdminUsers from "./pages/Admin/AdminUsers";
 import AdminBooking from "./pages/Admin/AdminBooking";
-import BookNow from "./pages/BookNow";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import BookNowWrapper from "./pages/BookNowWrapper";
+import Booking from "./pages/Booking";
 
 function App() {
   const { loading } = useSelector((state) => state.alerts);
+  const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
   return (
     <div>
       {loading && <Loader />}
@@ -36,7 +40,15 @@ function App() {
             path="/book-now/:id"
             element={
               <PrivateRoute>
-                <BookNow />
+                <BookNowWrapper />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/bookings"
+            element={
+              <PrivateRoute>
+                <Booking />
               </PrivateRoute>
             }
           />

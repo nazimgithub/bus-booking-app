@@ -18,7 +18,14 @@ function Login() {
       dispatch(hideLoading());
       if (response.data.success) {
         message.success(response.data.message);
-        localStorage.setItem("token", JSON.stringify(response.data.data));
+        // localStorage.setItem("token", JSON.stringify(response.data.data));
+        const { token, user } = response.data.data;
+
+        localStorage.setItem("token", token);
+        localStorage.setItem("userId", user.id);
+        localStorage.setItem("email", user.email);
+
+        console.log("Login Success");
         navigate("/");
       } else {
         message.error(response.data.message);

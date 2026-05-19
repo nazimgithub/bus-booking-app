@@ -27,7 +27,10 @@ function SeatSelection({
             }
 return (
               <Col key={seat} span={6}>
-              <div className={`seat ${seatClass}`} onClick={()=>selectOrunselectSeats(seat+1)}>{seat + 1}</div>
+              <div className={`seat ${seatClass}`} onClick={()=>selectOrunselectSeats(seat+1)}><img src="/seater_available.svg" alt="Available Seat"   style={{
+    height: "25px",
+    width: "25px",
+  }}/></div>
             </Col>
             );
           })}
