@@ -53,14 +53,6 @@ function App() {
             }
           />
           <Route
-            path="/admin"
-            element={
-              <PrivateRoute>
-                <AdminHome />
-              </PrivateRoute>
-            }
-          />
-          <Route
             path="/admin/buses"
             element={
               <PrivateRoute>

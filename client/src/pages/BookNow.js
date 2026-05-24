@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { message, Row, Col, Input } from "antd";
+import moment from "moment";
 
 import {
   PaymentElement,
@@ -20,6 +21,7 @@ function BookNow({ clientSecret }) {
   const userId = localStorage.getItem("userId");
   const stripe = useStripe();
   const elements = useElements();
+  const navigate = useNavigate();
 
   const [bus, setBus] = useState(null);
 
@@ -85,9 +87,10 @@ function BookNow({ clientSecret }) {
           transactionId,
         },
       );
-
+      dispatch(hideLoading());
       if (response.data.success) {
         message.success("Ticket Booked Successfully");
+        navigate("/bookings");
       } else {
         message.error(response.data.message);
       }
@@ -210,12 +213,11 @@ function BookNow({ clientSecret }) {
 
             {/* BUS DETAILS */}
             <div className="flex flex-col gap-2">
-              <h1 className="text-md">Journey Date: {bus.busJourney}</h1>
-
+              <h1 className="text-md">
+                Journey Date: {moment(bus.busJourney).format("YYYY-MM-DD")}
+              </h1>
               <h1 className="text-md">Fare: ₹{bus.busPrice}</h1>
-
               <h1 className="text-md">Departure Time: {bus.busDeparture}</h1>
-
               <h1 className="text-md">Arrival Time: {bus.busArrival}</h1>
             </div>
 

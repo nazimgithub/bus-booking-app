@@ -58,7 +58,7 @@ function AdminBuses() {
       dataIndex: "busName",
     },
     {
-      title: "Bus Number",
+      title: "Number",
       dataIndex: "busNumber",
     },
     {
@@ -70,7 +70,7 @@ function AdminBuses() {
       dataIndex: "busTo",
     },
     {
-      title: "Bus Type",
+      title: "Type",
       dataIndex: "busType",
     },
     {
@@ -85,6 +85,10 @@ function AdminBuses() {
       title: "Journey Date",
       dataIndex: "busJourney",
       render: (busJourney) => moment(busJourney).format("DD-MM-YYYY"),
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
     },
     {
       title: "Actions",

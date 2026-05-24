@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 function Bus({ bus }) {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ function Bus({ bus }) {
       <div className="d-flex justify-content-between">
         <div>
           <p>Journey Date:</p>
-          <p>{bus.busJourney}</p>
+          <p>{moment(bus.busJourney).format("YYYY-MM-DD")}</p>
         </div>
         <div>
           <button

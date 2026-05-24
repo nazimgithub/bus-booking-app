@@ -9,7 +9,7 @@
 }
 
 /* inputs */
-input{
+input, select, textarea{
   height: 40px;
   border: 2px solid #ccc;
   border-radius: 5px;
@@ -20,7 +20,7 @@ input{
 /* card */
 .card{
   border: 2px solid #ccc;
-  box-shadow: 0 0 2px gray;
+  box-shadow: 0 0 1px rgb(186, 186, 186);
   border-radius: 0 !important;
 }
 

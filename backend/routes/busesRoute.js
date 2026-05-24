@@ -5,7 +5,7 @@ const authMiddleware = require("../middlewares/authMiddleware");
 // Get All Buses
 router.post("/get-all-buses", authMiddleware, async (req, res) => {
   try {
-    const buses = await Bus.find();
+    const buses = await Bus.find(req.body);
     res.status(200).send({
       success: true,
       message: "Buses fetch successfully!",

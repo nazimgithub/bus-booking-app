@@ -118,4 +118,103 @@ router.post("/validate-token", authMiddleware, async (req, res) => {
   }
 });
 
+// get all users
+router.post("/get-all-users", authMiddleware, async (req, res) => {
+  try {
+    const users = await User.find();
+    res.send({
+      success: true,
+      message: "Users fetched successfully",
+      data: users,
+    });
+  } catch (err) {
+    res.send({
+      success: false,
+      message: err.message,
+      data: null,
+    });
+  }
+});
+
+// change user status
+router.post("/change-status", authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.body._id);
+
+    if (!user) {
+      return res.send({
+        success: false,
+        message: "User not found",
+        data: null,
+      });
+    }
+
+    // Toggle status
+    user.status = user.status === "Active" ? "In-Active" : "Active";
+
+    await user.save();
+
+    res.send({
+      success: true,
+      message: `User status changed to ${user.status}`,
+      data: user,
+    });
+  } catch (err) {
+    res.send({
+      success: false,
+      message: err.message,
+      data: null,
+    });
+  }
+});
+
+// user logout
+router.post("/logout", authMiddleware, async (req, res) => {
+  try {
+    req.user = null;
+    res.send({
+      success: true,
+      message: "User logged out successfully",
+      data: null,
+    });
+  } catch (err) {
+    res.send({
+      success: false,
+      message: err.message,
+      data: null,
+    });
+  }
+});
+
+// update user by id
+router.post("/update-user", authMiddleware, async (req, res) => {
+  try {
+    User.findByIdAndUpdate(
+      req.body._id,
+      req.body,
+      { new: true },
+      (err, user) => {
+        if (err) {
+          return res.send({
+            success: false,
+            message: err.message,
+            data: null,
+          });
+        }
+        res.send({
+          success: true,
+          message: "User updated successfully",
+          data: user,
+        });
+      },
+    );
+  } catch (error) {
+    res.send({
+      success: false,
+      message: error.message,
+      data: null,
+    });
+  }
+});
+
 module.exports = router;
