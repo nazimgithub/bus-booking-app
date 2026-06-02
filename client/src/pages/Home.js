@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { axiosInstance } from "../helpers/axiosInstance";
+import axios from "axios";
 import { showLoading, hideLoading } from "../redux/alertSlice";
-import { Col, Row, message, input, Button } from "antd";
+import { Col, Row, message } from "antd";
 import Bus from "../components/Bus";
 
 function Home() {
@@ -20,8 +20,12 @@ function Home() {
     });
     try {
       dispatch(showLoading());
-      axiosInstance
-        .post("http://localhost:5000/api/buses/get-all-buses", tempFilters)
+      axios
+        .post("http://localhost:5000/api/buses/get-all-buses", tempFilters, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
         .then((response) => {
           dispatch(hideLoading());
           if (response.data.success) {

@@ -41,11 +41,14 @@ function AdminUsers() {
       dispatch(hideLoading());
       if (response.data.success) {
         message.success(response.data.message);
-        setUsers();
+        getUsers();
       } else {
         message.error(response.data.message);
       }
-    } catch (error) {}
+    } catch (error) {
+      dispatch(hideLoading());
+      message.error(error.message);
+    }
   };
 
   const columns = [
@@ -87,7 +90,7 @@ function AdminUsers() {
           </Popconfirm>
           <Popconfirm
             title="Delete Bus"
-            description="Are you sure to update user status?"
+            description="Are you sure to change user status?"
             onConfirm={() => changeUserStatus(record._id)}
             okText="Yes"
             cancelText="No"

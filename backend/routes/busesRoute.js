@@ -79,4 +79,46 @@ router.post("/delete-bus", authMiddleware, async (req, res) => {
   }
 });
 
+// search buses
+router.post("/search-buses", async (req, res) => {
+  try {
+    const { from, to, journeyDate } = req.body;
+
+    const query = {
+      busForm: { $regex: `^${from}$`, $options: "i" },
+      busTo: { $regex: `^${to}$`, $options: "i" },
+    };
+
+    // If date is provided
+    if (journeyDate) {
+      const searchDate = new Date(journeyDate);
+
+      query.busJourney = { $lte: searchDate };
+      query.busJourneyEnd = { $gte: searchDate };
+
+      // Check running day
+      const dayName = searchDate.toLocaleDateString("en-US", {
+        weekday: "long",
+      });
+
+      query.runningDays = dayName;
+    }
+
+    const buses = await Bus.find(query).select(
+      "busName busNumber busType busDeparture busArrival busPrice busCapacity",
+    );
+
+    res.status(200).send({
+      success: true,
+      message: "Buses fetched successfully!",
+      data: buses,
+    });
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
 module.exports = router;

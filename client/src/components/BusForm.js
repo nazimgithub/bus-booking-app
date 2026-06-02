@@ -150,11 +150,25 @@ function BusForm({
           <Col span={12}>
             <Form.Item
               name="busJourney"
-              label="Journey Date"
+              label="Journey Start Date"
               rules={[
                 {
                   required: true,
-                  message: "Select Journey Date",
+                  message: "Select Journey start Date",
+                },
+              ]}
+            >
+              <input type="date" />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              name="busJourneyEnd"
+              label="Journey End Date"
+              rules={[
+                {
+                  required: true,
+                  message: "Select Journey End Date",
                 },
               ]}
             >
@@ -234,13 +248,22 @@ function BusForm({
             </Form.Item>
           </Col>
           <Col span={12}>
+            <Form.Item label="Frequency" name="frequency">
+              <Select>
+                <Select.Option value="daily">Daily</Select.Option>
+                <Select.Option value="weekly">Weekly</Select.Option>
+                <Select.Option value="monthly">Monthly</Select.Option>
+                <Select.Option value="once">Once</Select.Option>
+              </Select>
+            </Form.Item>
+          </Col>
+          <Col span={12}>
             <Form.Item label="Status" name="status">
               <Select>
                 <Select.Option value="Yet to Start">Yet to Start</Select.Option>
-
                 <Select.Option value="Running">Running</Select.Option>
-
                 <Select.Option value="Completed">Completed</Select.Option>
+                <Select.Option value="Cancelled">Cancelled</Select.Option>
               </Select>
             </Form.Item>
           </Col>

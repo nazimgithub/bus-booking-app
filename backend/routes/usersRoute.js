@@ -56,6 +56,15 @@ router.post("/login", async (req, res) => {
       });
     }
 
+    // Check user status
+    if (user.status === "In-Active") {
+      return res.send({
+        success: false,
+        message: "User cannot login into the application. Account is inactive.",
+        data: null,
+      });
+    }
+
     const isPasswordValid = await bcrypt.compare(
       req.body.password,
       user.password,

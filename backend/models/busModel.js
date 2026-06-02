@@ -26,6 +26,10 @@ const busSchema = new moongose.Schema({
     type: Date,
     required: true,
   },
+  busJourneyEnd: {
+    type: Date,
+    required: true,
+  },
   busDeparture: {
     type: String,
     required: true,
@@ -48,7 +52,42 @@ const busSchema = new moongose.Schema({
   },
   status: {
     type: String,
-    default: "Yet to start",
+    enum: ["Yet to Start", "Running", "Completed", "Cancelled"],
+    default: "Yet to Start",
+  },
+  busImages: {
+    type: [String],
+    default: [],
+  },
+  frequency: {
+    type: String,
+    enum: ["daily", "weekly", "monthly", "once"],
+    default: "daily",
+  },
+  runningDays: {
+    type: [String],
+    default: function () {
+      if (this.frequency === "daily") {
+        return [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ];
+      }
+      return [];
+    },
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now,
   },
 });
 

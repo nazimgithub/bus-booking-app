@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../redux/alertSlice";
+import "../resources/auth.css";
 
 function Register() {
   const dispatch = useDispatch();
@@ -30,30 +31,34 @@ function Register() {
   };
 
   return (
-    <div className="h-screen d-flex justify-content-center align-items-center">
-      <div className="w-400 card p-3">
-        <h3 className="text-center text-lg">BookBus - Register</h3>
-        <hr />
-        <Form layout="vertical" onFinish={onFinish}>
-          <Form.Item name="name" label="Name">
-            <input type="text" />
-          </Form.Item>
-          <Form.Item name="email" label="Email">
-            <input type="email" />
-          </Form.Item>
-          <Form.Item name="password" label="Password">
-            <input type="password" />
-          </Form.Item>
-          <Form.Item name="phone" label="Phone Number">
-            <input type="text" />
-          </Form.Item>
-          <div className="d-flex justify-content-between align-items-center">
-            <Link to="/login">Click here to Login</Link>
-            <button className="primary-btn" type="submit">
-              Register
-            </button>
-          </div>
-        </Form>
+    <div className="login-container">
+      <div className="login-image"></div>
+
+      <div className="login-form-section">
+        <div className="w-400 card p-3">
+          <h3 className="text-center">BookBus - Register</h3>
+          <hr />
+          <Form layout="vertical" onFinish={onFinish}>
+            <Form.Item name="name" label="Name">
+              <input type="text" />
+            </Form.Item>
+            <Form.Item name="email" label="Email">
+              <input type="email" />
+            </Form.Item>
+            <Form.Item name="password" label="Password">
+              <input type="password" />
+            </Form.Item>
+            <Form.Item name="phone" label="Phone Number">
+              <input type="text" />
+            </Form.Item>
+            <div className="d-flex justify-content-between align-items-center">
+              <Link to="/login">Click here to Login</Link>
+              <button className="primary-btn" type="submit">
+                Register
+              </button>
+            </div>
+          </Form>
+        </div>
       </div>
     </div>
   );

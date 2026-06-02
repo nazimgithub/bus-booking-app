@@ -18,6 +18,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import BookNowWrapper from "./pages/BookNowWrapper";
 import Booking from "./pages/Booking";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
   const { loading } = useSelector((state) => state.alerts);
@@ -89,6 +90,14 @@ function App() {
             element={
               <PublicRoute>
                 <Login />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/bus-search"
+            element={
+              <PublicRoute>
+                <SearchPage />
               </PublicRoute>
             }
           />
